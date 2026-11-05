@@ -1,43 +1,36 @@
+
 {
-    "$schema": "https://raw.githubusercontent.com/FLECS-Technologies/app-sdk/3.0.0/manifest.schema.json",
-    "_schemaVersion": "3.0.0",
-    "app": "",
+    "$schema": "https://raw.githubusercontent.com/FLECS-Technologies/app-sdk/main/manifest.schema.json",
+    "_schemaVersion": "2.0.0",
+    "app": "com.emerson.traefik",
     "version": "##VERSION##",
     "revision": "0",
-    "image": "flecs.azurecr.io/",
+    "image": "flecs.azurecr.io/com.emerson.traefik",
     "multiInstance": false,
-    "editors": [
-        {
-            "name": "My UI",
-            "port": 6789,
-            "supportsReverseProxy": true
-        }
-    ],
+    "editor": "",
     "args": [
-        "--launch-arg-1",
-        "--launch-arg-2=8000"
+        "--providers.docker=true",
+        "--providers.docker.exposedbydefault=false",
+        "--entrypoints.web.address=:80",
+        "--entrypoints.web.transport.respondingTimeouts.readTimeout=1800",
+        "--entrypoints.web.transport.respondingTimeouts.writeTimeout=1800",
+        "--entrypoints.web.transport.respondingTimeouts.idleTimeout=1800",
+        "--serverstransport.insecureskipverify=true"
     ],
     "capabilities": [],
-    "conffiles": [
-        "default.conf:/etc/my-app/default.conf",
-        "default.conf:/etc/my-app/default.conf:ro",
-        "default.conf:/etc/my-app/default.conf:rw"
-    ],
-    "devices": [
-        "/dev/net/tun"
-    ],
-    "env": [
-        "MY_ENV=value"
-    ],
+    "conffiles": [],
+    "devices": [],
+    "hostname": "emerson-traefik",
+    "env": [],
     "ports": [
-        "12345:12345"
+        "127.0.0.1:40000:80"
     ],
     "volumes": [
-        "my-app-etc:/etc/my-app",
-        "/var/lib/my-app:/var/lib/my-app"
+        "/var/run/docker.sock:/var/run/docker.sock:ro",
+        "/etc/timezone:/etc/timezone:ro",
+        "/etc/localtime:/etc/localtime:ro"
     ],
     "labels": [
-        "org.my.label",
-        "org.my.label-with-value=Some custom label value"
+        "traefik.enable=false"
     ]
 }
