@@ -26,9 +26,9 @@
         "127.0.0.1:40000:80"
     ],
     "volumes": [
-        "/var/run/docker.sock:/var/run/docker.sock:ro",
-        "/etc/timezone:/etc/timezone:ro",
-        "/etc/localtime:/etc/localtime:ro"
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "/etc/timezone:/etc/timezone",
+        "/etc/localtime:/etc/localtime"
     ],
     "labels": [
         "traefik.enable=false"
